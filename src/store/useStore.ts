@@ -15,6 +15,10 @@ interface AppState {
   particleColor: string;
   expansionFactor: number;
   
+  // Audio State
+  isMuted: boolean;
+  volume: number;
+  
   // Action Setters
   setHandPosition: (pos: { x: number; y: number; z: number }) => void;
   setHandActive: (active: boolean) => void;
@@ -23,6 +27,8 @@ interface AppState {
   setShape: (shape: ShapeType) => void;
   setColor: (color: string) => void;
   toggleShape: () => void;
+  setIsMuted: (muted: boolean) => void;
+  setVolume: (val: number) => void;
 }
 
 const SHAPES: ShapeType[] = ["HEART", "FLOWER", "SATURN", "FIREWORK", "STAR_BLAST", "SPHERE"];
@@ -35,6 +41,8 @@ export const useStore = create<AppState>((set, get) => ({
   currentShape: "SPHERE",
   particleColor: "#00eeff",
   expansionFactor: 1,
+  isMuted: false,
+  volume: 0.5,
 
   setHandPosition: (pos) => set({ handPosition: pos }),
   setHandActive: (active) => set({ handActive: active }),
@@ -42,6 +50,8 @@ export const useStore = create<AppState>((set, get) => ({
   setPinchDistance: (dist) => set({ pinchDistance: dist }),
   setShape: (shape) => set({ currentShape: shape }),
   setColor: (color) => set({ particleColor: color }),
+  setIsMuted: (isMuted) => set({ isMuted }),
+  setVolume: (volume) => set({ volume }),
   
   toggleShape: () => {
     const currentIndex = SHAPES.indexOf(get().currentShape);

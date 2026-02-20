@@ -3,7 +3,16 @@
 import { useStore } from "@/store/useStore";
 
 export default function UIOverlay() {
-  const { gesture, currentShape, handActive, toggleShape } = useStore();
+  const { 
+    gesture, 
+    currentShape, 
+    handActive, 
+    toggleShape,
+    isMuted,
+    setIsMuted,
+    volume,
+    setVolume
+  } = useStore();
 
   return (
     <div className="w-full h-full p-8 flex flex-col justify-between text-white drop-shadow-lg">
@@ -32,6 +41,29 @@ export default function UIOverlay() {
           </ul>
         </div>
         
+        <div className="flex flex-col gap-2 bg-black/40 backdrop-blur-sm p-4 rounded-lg border border-white/10">
+          <h3 className="font-bold text-cyan-300 flex items-center gap-2">
+            <span>MUSIC</span>
+            <button 
+              onClick={() => setIsMuted(!isMuted)}
+              className="pointer-events-auto opacity-70 hover:opacity-100 transition-opacity"
+            >
+              {isMuted ? "🔇" : "🔊"}
+            </button>
+          </h3>
+          <input 
+            type="range" 
+            min="0" 
+            max="1" 
+            step="0.01" 
+            value={volume}
+            title="Music Volume"
+            aria-label="Music Volume"
+            onChange={(e) => setVolume(parseFloat(e.target.value))}
+            className="w-full accent-cyan-500 pointer-events-auto h-1 bg-white/20 rounded-lg appearance-none cursor-pointer"
+          />
+        </div>
+
         <div className="flex gap-2">
           <button 
             onClick={toggleShape}

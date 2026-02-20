@@ -7,10 +7,12 @@ import { Suspense } from "react";
 const Scene = dynamic(() => import("@/components/canvas/Scene"), { ssr: false });
 const WebcamFeed = dynamic(() => import("@/components/dom/WebcamFeed"), { ssr: false });
 const UIOverlay = dynamic(() => import("@/components/dom/UIOverlay"), { ssr: false });
+const AudioPlayer = dynamic(() => import("@/components/dom/AudioPlayer"), { ssr: false });
 
 export default function Home() {
   return (
     <main className="relative w-screen h-screen bg-black overflow-hidden">
+      <AudioPlayer />
       {/* 3D Scene */}
       <div className="absolute inset-0 z-0">
         <Suspense fallback={<div className="flex items-center justify-center w-full h-full text-white">Loading Scene...</div>}>
